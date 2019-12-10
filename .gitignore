@@ -1,0 +1,15 @@
+*.log
+.idea
+node_modules/
+venv/
+.vscode
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.so
+build/
+develop-eggs/
+eggs/
+.eggs/
