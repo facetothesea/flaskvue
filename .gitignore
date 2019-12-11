@@ -9,7 +9,7 @@ __pycache__/
 *$py.class
 
 *.so
-build/
 develop-eggs/
 eggs/
 .eggs/
+package-lock.json
