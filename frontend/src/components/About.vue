@@ -1,6 +1,8 @@
 <template>
   <div>
-    <p>关于</p>
+    <br><br><br>
+    <p>这是个人练手项目，仅供学习之用！</p>
+    <p>hbxgliupan@sina.com</p>
   </div>
 </template>
 

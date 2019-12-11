@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>首页</p>
+    <p>安全库存管理</p>
   </div>
 </template>
 
