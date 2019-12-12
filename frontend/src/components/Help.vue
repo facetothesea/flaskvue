@@ -5,4 +5,12 @@
 </template>
 
 <script>
+export default {
+  name: 'Help',
+  data() {
+    return {
+      flag: "a"
+    }
+  }
+}
 </script>

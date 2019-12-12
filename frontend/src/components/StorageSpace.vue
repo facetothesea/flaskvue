@@ -5,4 +5,12 @@
 </template>
 
 <script>
+export default {
+  name: 'StorageSpace',
+  data() {
+    return {
+      flag: "a"
+    }
+  }
+}
 </script>

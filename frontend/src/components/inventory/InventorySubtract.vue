@@ -1,6 +1,6 @@
 <template>
   <!-- 出库表单 -->
-  <el-form :model="subForm" ref="subForm" label-width="auto">
+  <el-form :model="subForm" ref="subForm" label-position="right" label-width="50px">
     <el-form-item prop="code" size="mini" label="编号">
       <el-input v-model="subForm.code"></el-input>
     </el-form-item>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'InventorySubtract',
   data(){
@@ -32,7 +33,7 @@ export default {
         code:'',
         name:'',
         allocation:'',
-        acount:0,
+        acount: '',
         remark:''
       }
     }

@@ -1,6 +1,6 @@
 <template>
   <!-- 移库表单 -->
-  <el-form :model="moveForm" ref="moveForm" label-width="auto">
+  <el-form :model="moveForm" ref="moveForm"  label-position="right" label-width="50px">
     <el-form-item prop="allocationFrom" size="mini" label="移出">
       <el-input v-model="moveForm.allocationFrom"></el-input>
     </el-form-item>
@@ -15,6 +15,9 @@
     </el-form-item>
     <el-form-item prop="acount" size="mini" label="数量">
       <el-input v-model="moveForm.acount"></el-input>
+    </el-form-item>
+    <el-form-item prop="remark" size="mini" label="备注">
+        <el-input v-model="moveForm.remark"></el-input>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" size="mini"  @click="submitForm('moveForm')">提交</el-button>
@@ -33,7 +36,8 @@ export default{
         allocationTo:'',
         code:'',
         name:'',
-        acount:0
+        acount: '',
+        remark: ''
       }
     }
   },

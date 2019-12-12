@@ -2,7 +2,7 @@
   <div id="app">
     <el-menu
       :default-active="activeIndex"
-      router=true
+      router 
       class="el-menu-demo"
       mode="horizontal"
       background-color="#545c64"

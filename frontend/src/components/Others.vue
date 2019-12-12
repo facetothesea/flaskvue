@@ -11,6 +11,7 @@
 import axios from 'axios'
 
 export default {
+  name: "Others",
   data () {
     return { randomNumber: 0 }
   },
@@ -25,7 +26,7 @@ export default {
     },
     getRandomFromBackend () {
       const path = `http://localhost:5000/api/random`
-      axios.get(path)
+      axios.get('/api/getNumber')
         .then(response => {
           this.randomNumber = response.data.randomNumber
         })

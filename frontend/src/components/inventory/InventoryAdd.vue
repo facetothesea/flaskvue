@@ -1,7 +1,7 @@
 <template>
   <!-- 入库操作表单 -->
   <div>
-    <el-form :model="addForm" ref="addForm" label-width="auto" class="demo-dynamic">
+    <el-form :model="addForm" ref="addForm"  label-position="right" label-width="50px">
       <el-form-item prop="code" size="mini"  label="编号">
         <el-input v-model="addForm.code"></el-input>
       </el-form-item>

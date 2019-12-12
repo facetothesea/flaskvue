@@ -7,7 +7,14 @@
 </template>
 
 <script>
-
+export default {
+  name: 'About',
+  data() {
+    return {
+      flag: "a"
+    }
+  }
+}
 </script>
 
 <style scoped>

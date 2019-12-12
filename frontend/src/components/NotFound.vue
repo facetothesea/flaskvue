@@ -8,9 +8,15 @@
 
   </div>
 </template>
-
 <script>
-
+export default {
+  name: 'NotFound',
+  data() {
+    return {
+      flag: "a"
+    }
+  }
+}
 </script>
 
 <style scoped>

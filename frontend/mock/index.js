@@ -1,28 +1,29 @@
-const fs=require('fs')
+const fs = require('fs')
 
-const proxy={
-  'GET /api/user': {id: 1, username: 'kenny', sex: 6},
-  'GET /api/user/list':[
-    {id: 1, username: 'kenny', sex: 6},
-    {id: 2, username: 'kenny2', sex: 7}
+const proxy = {
+  'GET /api/user': { id: 1, username: 'kenny', sex: 6 },
+  'GET /api/getNumber': { randomNumber: 33 },
+  'GET /api/user/list': [
+    { id: 1, username: 'kenny', sex: 6 },
+    { id: 2, username: 'kenny2', sex: 7 }
   ],
-  'POST /api/login/account': (req, res) =>{
-    const { password, username} = req.body
-    if ( password === "88888888" && username === "admin" ) {
+  'POST /api/login/account': (req, res) => {
+    const { password, username } = req.body
+    if (password === '88888888' && username === 'admin') {
       return res.send({
         status: 'ok',
         code: 0,
         token: 'adkeofkjdljoeijflj',
-        data: {id: 1, username: 'kenny', sex: 6}
-      });
-    }else{
-      return res.send({status:'error',code:403});
-    }
+        data: { id: 1, username: 'kenny', sex: 6 }
+      })
+        } else {
+      return res.send({ status: 'error', code: 403 })
+        }
   },
-  '/DELETE /api/user/:id':(req,res)=>{
-    console.log('--->',req.body)
-    console.log('--->',req.params.id)
-    res.send({status:'ok',message:'删除成功'})
+  '/DELETE /api/user/:id': (req, res) => {
+    console.log('--->', req.body)
+    console.log('--->', req.params.id)
+    res.send({ status: 'ok', message: '删除成功' })
   }
 }
 module.exports = proxy

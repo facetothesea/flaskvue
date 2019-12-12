@@ -5,4 +5,12 @@
 </template>
 
 <script>
+export default {
+  name: 'SafetyInventory',
+  data() {
+    return {
+      flag: "a"
+    }
+  }
+}
 </script>

@@ -5,4 +5,12 @@
 </template>
 
 <script>
+export default {
+  name: 'Material',
+  data() {
+    return {
+      flag: "a"
+    }
+  }
+}
 </script>
