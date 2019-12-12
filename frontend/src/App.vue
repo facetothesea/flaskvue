@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-menu
-      :default-active="activeIndex2"
+      :default-active="activeIndex"
       router=true
       class="el-menu-demo"
       mode="horizontal"
@@ -30,7 +30,7 @@ export default {
   name: 'App',
   data () {
     return {
-      activeIndex2: '/'
+      activeIndex: '/'
     }
   }
 }
@@ -45,16 +45,15 @@ export default {
   color: #2c3e50;
   margin-top: 0px;
 }
-.el-menu--horizontal>.el-menu-item{
-  height: 40px;
-  line-height: 40px;
+/* .el-menu--horizontal>.el-menu-item{
+  height: 50px;
+  line-height: 50px;
   font-size: 8px;
 }
 .el-menu--horizontal>.el-submenu
 .el-submenu__title{
-  height: 40px;
-  line-height: 40px;
+  height: 50px;
+  line-height: 50px;
   font-size: 7px;
-  text-align: left;
-}
+} */
 </style>

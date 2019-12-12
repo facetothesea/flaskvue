@@ -1,51 +1,60 @@
 <template>
   <!-- 入库操作表单 -->
   <div>
-  <el-form :model="goIn" label-width="15%" class="demo-dynamic">
-    <el-form-item prop="code" size="mini"  label="物料编号">
-      <el-input v-model="code"></el-input>
-    </el-form-item>
-    <el-form-item prop="name" size="mini"  label="物料名称">
-      <el-input v-model="name"></el-input>
-    </el-form-item>
-    <el-form-item prop="allocation" size="mini"  label="货位名称">
-      <el-input v-model="allocation"></el-input>
-    </el-form-item>
-    <el-form-item prop="acount" size="mini"  label="入库数量">
-      <el-input v-model="acount"></el-input>
-    </el-form-item>
-    <el-form-item prop="remark" size="mini"  label="备注信息">
-      <el-input v-model="remark"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" size="mini"  @click="showLog">提交</el-button>
-      <el-button size="mini"  @click="showLog">重置</el-button>
-    </el-form-item>
-  </el-form>
-    <el-button type="primary" size="mini" @click="showLog">测试Mock是否成功，查看console.log()</el-button>
+    <el-form :model="addForm" ref="addForm" label-width="auto" class="demo-dynamic">
+      <el-form-item prop="code" size="mini"  label="编号">
+        <el-input v-model="addForm.code"></el-input>
+      </el-form-item>
+      <el-form-item prop="name" size="mini"  label="名称">
+        <el-input v-model="addForm.name"></el-input>
+      </el-form-item>
+      <el-form-item prop="allocation" size="mini"  label="货位">
+        <el-input v-model="addForm.allocation"></el-input>
+      </el-form-item>
+      <el-form-item prop="acount" size="mini"  label="数量">
+        <el-input v-model="addForm.acount"></el-input>
+      </el-form-item>
+      <el-form-item prop="remark" size="mini" label="备注">
+        <el-input v-model="addForm.remark"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" size="mini"  @click="submitForm('addForm')">提交</el-button>
+        <el-button size="mini"  @click="resetForm('addForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
-  name: 'App',
+  name: 'InventoryAdd',
   data () {
     return {
-
+      addForm:{
+        code: '',
+        name: '',
+        allocation: '',
+        acount: '',
+        remark: ''
+      }
     }
   },
   methods: {
-    showLog () {
-      // const path = `/api/user`
-      axios.get('/api/user')
-        .then(response => {
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
+  submitForm(formName){
+    this.$refs[formName].validate((valid)=>{
+      if (valid){
+        alert('提交成功')
+      }else{
+        console.log('inventoryChange submitted....')
+        alert('提交失败')
+        return false
+      }
+    })
+  },
+  resetForm(formName){
+    this.$refs[formName].resetFields()
+  }
   }
 }
 </script>
