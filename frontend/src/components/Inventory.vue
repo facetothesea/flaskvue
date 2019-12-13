@@ -4,7 +4,7 @@
       <p></p>
     </el-row>
     <el-row>
-      <el-col :span='14' :offset="2" class="leftpan">
+      <el-col :span='12' :offset="2" class="leftpan">
         <el-row v-for="(o, i) in storeData" :key=i>
           <el-col :span='2' v-for="(r,j) in o" :key=j>
             <el-button @click="showDrawer(r,i+j)" type="primary" class="btnshow" :key="i+j">
@@ -210,9 +210,12 @@ export default{
   margin-bottom:5px;
   font-size:6px;
   color: #fff;
-  background-color: #bbb;
+  background-color: rgba(72, 134, 153, 0.685);
+  /* background-color:#409eff; */
   opacity:1.0;
   border:none;
+  font-weight:400;
+  font-family:Consolas,"Courier New",Courier,FreeMono,monospace;
 }
 .text{
   font-size: 8px;
@@ -233,9 +236,4 @@ export default{
   font-size:10px;
   font-weight: 100;
 }
-/*
-.badgeitem{
-  margin-top:1px;
-  margin-right:-11px;
-} */
 </style>
