@@ -2,7 +2,7 @@
   <!-- 出库表单 -->
   <el-form :model="subForm" ref="subForm" label-position="right" label-width="50px">
     <el-form-item prop="code" size="mini" label="编号">
-      <el-input v-model="subForm.code"></el-input>
+      <el-input v-model="subForm.code" disabled></el-input>
     </el-form-item>
     <el-form-item prop="name" size="mini" label="名称">
       <el-input v-model="subForm.name"></el-input>
@@ -39,20 +39,23 @@ export default {
     }
   },
   methods: {
-    submitForm(formName){
-      this.$refs[formName].validate((valid)=>{
-        if (valid){
-          alert('提交成功')
-        }else{
-          console.log('inventoryChange submitted....')
-          alert('提交失败')
-          return false
-        }
-      })
-    },
-    resetForm(formName){
-      this.$refs[formName].resetFields()
-    }
+  submitForm(formName){
+    this.$refs[formName].validate((valid)=>{
+      if (valid){
+        alert('提交成功')
+        // 1.提交至操作记录表；
+        // 2.更新当前库存表；
+        // 3.更新页面显示数据；
+      }else{
+        console.log('inventoryChange submitted....')
+        alert('提交失败')
+        return false
+      }
+    })
+  },
+  resetForm(formName){
+    this.$refs[formName].resetFields()
+  }
   }
 }
 </script>
