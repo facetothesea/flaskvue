@@ -7,11 +7,14 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Help from '@/components/Help.vue'
 import Home from '@/components/Home.vue'
 import Inventory from '@/components/Inventory.vue'
-import Material from '@/components/Material.vue'
 import NotFound from '@/components/NotFound.vue'
 import Others from '@/components/Others'
 import SafetyInventory from '@/components/SafetyInventory.vue'
 import StorageSpace from '@/components/StorageSpace.vue'
+
+import Material from '@/components/Material.vue'
+// import MaterialAdd from '@/components/material/MaterialAdd'
+// import MaterialModify from '@/components/material/MaterialModify'
 
 Vue.use(Router)
 
@@ -52,6 +55,16 @@ export default new Router({
     name: 'materialmgmt',
     component: Material
   },
+  // {
+  //   path: '/materialmodify',
+  //   name: 'materialmodify',
+  //   component: MaterialModify
+  // },
+  // {
+  //   path: '/materialadd',
+  //   name: 'materialadd',
+  //   component: MaterialAdd
+  // },
   {
     path: '/others',
     name: 'others',

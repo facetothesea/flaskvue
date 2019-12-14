@@ -4,7 +4,7 @@
       <p></p>
     </el-row>
     <el-row>
-      <el-col :span='12' :offset="2" class="leftpan">
+      <el-col :span='15' :offset="1" class="leftpan">
         <el-row v-for="(o, i) in storeData" :key=i>
           <el-col :span='2' v-for="(r,j) in o" :key=j>
             <el-button @click="showDrawer(r,i+j)" type="primary" class="btnshow" :key="i+j">
@@ -16,7 +16,7 @@
           title="详细信息"
           :visible.sync="drawer"
           :with-header="false"
-          direction="ltr"
+          direction="rtl"
           class="drawer">
           <span>货位[{{ now }}]存货信息</span>
           <el-table :data="drawerData">
@@ -27,7 +27,7 @@
         </el-drawer>
       </el-col>
 
-      <el-col :span='7' class="rightpan">
+      <el-col :span='5' class="rightpan">
         <el-tabs
         v-model="activeName"
         type="border-card">
@@ -70,7 +70,7 @@ export default{
           '07A':[ { code:'001',  name:'电池12',  acount: 100 }],
           '08A':[ { code:'001',  name:'电池12',  acount: 100 }],
           '09A':[ { code:'001',  name:'电池12',  acount: 100 }],
-          '10A':[ { code:'001',  name:'电池12',  acount: 100 }]
+          '10A':[ ]
         },
         'B': {
           '01A':[ { code:'001',  name:'电池12',  acount: 100 }],

@@ -1,12 +1,11 @@
 <template>
-  <!-- 入库操作表单 -->
   <div>
-    <el-form :model="addForm" :rules='rules' ref="addForm"  label-position="right" label-width="50px">
-      <el-form-item prop="code" size="mini"  label="编号">
-        <el-input v-model="addForm.code" disabled></el-input>
+    <el-form :model="safeAddForm" :rules='rules' ref="safeAddForm"  label-position="right" label-width="50px">
+      <el-form-item prop="code" size="mini"  label="编号" >
+        <el-input v-model="safeAddForm.code" disabled></el-input>
       </el-form-item>
       <el-form-item prop="name" size="mini"  label="名称">
-        <el-select v-model="addForm.name" filterable placeholder="选择或搜索" @change="handleChange">
+        <el-select v-model="safeAddForm.name" filterable placeholder="选择或搜索" @change="handleChange">
           <el-option
           v-for="item in nameOptions"
           :key="item.value"
@@ -16,25 +15,15 @@
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item prop="allocation" size="mini"  label="货位">
-        <el-select v-model="addForm.allocation" filterable placeholder="输入名称搜索">
-          <el-option
-          v-for="item2 in storageOptions"
-          :key="item2.value"
-          :label="item2.value"
-          :value="item2.value">
-          </el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item prop="acount" size="mini"  label="数量">
-        <el-input v-model="addForm.acount"></el-input>
+        <el-input v-model="safeAddForm.acount"></el-input>
       </el-form-item>
       <el-form-item prop="remark" size="mini" label="备注">
-        <el-input type="textarea" rows=5 v-model="addForm.remark"></el-input>
+        <el-input type="textarea" rows=5 v-model="safeAddForm.remark"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" size="mini"  @click="submitForm('addForm')">提交</el-button>
-        <el-button size="mini"  @click="resetForm('addForm')">重置</el-button>
+        <el-button type="primary" size="mini"  @click="submitForm('safeAddForm')">提交</el-button>
+        <el-button size="mini"  @click="resetForm('safeAddForm')">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -43,7 +32,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'InventoryAdd',
+  name: 'SafetyAdd',
   data () {
     return {
       nameOptions:[
@@ -55,17 +44,9 @@ export default {
           label: '电池20'
         }
       ],
-      storageOptions:[
-        {
-          value: 'A01A'
-        }, {
-          value: 'C03A'
-        }
-      ],
-      addForm:{
+      safeAddForm:{
         code: '',
         name: '',
-        allocation: '',
         acount: '',
         remark: ''
       },
@@ -78,16 +59,8 @@ export default {
         ],
         acount:[
           {required:true,pattern:/^\d{1,9}$/,message:'整数,最多9位'}
-        ],
-        allocation:[
-          {required:true,message:"不能为空",trigger:'blur'}
         ]
       }
-    }
-  },
-  computed:{
-    CODE:function(){
-      return this.invname
     }
   },
   methods: {
@@ -98,8 +71,8 @@ export default {
         // 2.更新当前库存表；
         // 3.更新页面显示数据；
         this.$notify({
-          title: '入库成功',
-          message: '信息:'+this.addForm.code+"/"+this.addForm.name+"/"+this.addForm.allocation+"/"+this.addForm.acount+"/"+this.addForm.remark,
+          title: '创建'+this.safeAddForm.name+'成功',
+          message: '信息:'+this.safeAddForm.code+"/"+this.safeAddForm.name+"/"+this.safeAddForm.pcs+"/"+this.safeAddForm.state+"/"+this.safeAddForm.remark,
           type: 'success'
         });
       }else{
@@ -112,7 +85,7 @@ export default {
     this.$refs[formName].resetFields()
   },
   handleChange(value){
-    this.addForm.code=value
+    this.safeAddForm.code=value
   }
   }
 }

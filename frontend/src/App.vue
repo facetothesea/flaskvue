@@ -2,7 +2,7 @@
   <div id="app">
     <el-menu
       :default-active="activeIndex"
-      router 
+      router
       class="el-menu-demo"
       mode="horizontal"
       background-color="#545c64"
@@ -30,7 +30,7 @@ export default {
   name: 'App',
   data () {
     return {
-      activeIndex: '/'
+      activeIndex: '/inventorymgmt'
     }
   }
 }
