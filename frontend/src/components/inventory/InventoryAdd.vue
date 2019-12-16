@@ -97,12 +97,29 @@ export default {
         // 1.提交至操作记录表；
         // 2.更新当前库存表；
         // 3.更新页面显示数据；
-        this.$notify({
-          title: '入库成功',
-          message: '信息:'+this.addForm.code+"/"+this.addForm.name+"/"+this.addForm.allocation+"/"+this.addForm.acount+"/"+this.addForm.remark,
-          type: 'success'
-        });
-      }else{
+        axios.post('/api/inventory/add',this.addForm)
+        .then(response => {
+          console.log(response)
+          console.log(response.data)
+          console.log(response.statusText)
+          console.log(response.data.data)
+          console.log(response.data.data.name)
+          console.log(response.data.data.code)
+          alert(response)
+          alert(response.statusText)
+          alert(response.data)
+          if(response.statusText === 'OK'){
+            this.$notify({
+            title: '入库成功',
+            message: '信息:'+this.addForm.code+"/"+this.addForm.name+"/"+this.addForm.allocation+"/"+this.addForm.acount+"/"+this.addForm.remark,
+            type: 'success'
+          });
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+        }else{
         // this.$alert('提交失败,请联系管理员',"未提交")
         console.log('未提交')
       }

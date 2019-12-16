@@ -1,7 +1,16 @@
-const fs = require('fs')
+// const fs = require('fs')
 
 const proxy = {
-  'GET /api/user': { id: 1, username: 'kenny', sex: 6 },
+  'GET /api/getNumber': { randomNumber: Math.floor((Math.random()* 100) + 1) },
+  'POST /api/inventory/add': (req, res) => {
+    const { code, name, acount } = req.body
+    return res.send({
+      status: 'ok',
+      code: 0,
+      data: { 'code': code, 'name': name, 'acount': acount }
+    }
+    )
+  },
   'GET /api/getsafety': [
     { code: '1001', name: '1001', acount: '9000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
     { code: '1002', name: '1002', acount: '8000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
@@ -30,7 +39,6 @@ const proxy = {
     { allocation: 'A91A', state: '1', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'},
     { allocation: 'A71A', state: '1', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'}
   ],
-  'GET /api/getNumber': { randomNumber: 33 },
   'GET /api/user/list': [
     { id: 1, username: 'kenny', sex: 6 },
     { id: 2, username: 'kenny2', sex: 7 }
@@ -44,9 +52,9 @@ const proxy = {
         token: 'adkeofkjdljoeijflj',
         data: { id: 1, username: 'kenny', sex: 6 }
       })
-        } else {
-      return res.send({ status: 'error', code: 403 })
-        }
+      } else {
+    return res.send({ status: 'error', code: 403 })
+      }
   },
   '/DELETE /api/user/:id': (req, res) => {
     console.log('--->', req.body)
