@@ -41,71 +41,79 @@
 import axios from 'axios'
 export default {
   name: 'InventorySubtract',
-  data(){
+  data () {
     return {
-      nameOptions:[
-        {
-          value: '101',
-          label: '电池12'
-        }, {
-          value: '102',
-          label: '电池20'
-        }
-      ],
-      storageOptions:[
-        {
-          value: 'A01A'
-        }, {
-          value: 'C03A'
-        }
-      ],
-      subForm:{
-        code:'',
-        name:'',
-        allocation:'',
+      nameOptions: [ { } ],
+      storageOptions: [ { } ],
+      subForm: {
+        code: '',
+        name: '',
+        allocation: '',
         acount: '',
-        remark:''
+        remark: ''
       },
-      rules:{
-        name:[
-          { required: true, message:"不能为空",trigger:'blur'}
+      rules: {
+        name: [
+          { required: true, message: '不能为空', trigger: 'blur'}
         ],
-        code:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        code: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        acount:[
-          {required:true,pattern:/^\d{1,9}$/,message:'整数,最多9位'}
+        acount: [
+          {required: true, pattern: /^\d{1,9}$/, message: '整数,最多9位'}
         ],
-        allocation:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        allocation: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ]
       }
     }
   },
+  mounted: function () {
+    axios.get('/api/getMaterials')
+      .then(response => {
+        this.nameOptions = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    axios.get('/api/getAllocations')
+      .then(response => {
+        this.storageOptions = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+  },
   methods: {
-  submitForm(formName){
-    this.$refs[formName].validate((valid)=>{
-      if (valid){
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
         // 1.提交至操作记录表；
         // 2.更新当前库存表；
         // 3.更新页面显示数据；
-        this.$notify({
-          title: '入库成功',
-          message: '信息:'+this.subForm.code+"/"+this.subForm.name+"/"+this.subForm.allocation+"/"+this.subForm.acount+"/"+this.subForm.remark,
-          type: 'success'
-        });
-      }else{
-        // this.$alert('提交失败,请联系管理员',"未提交")
-        console.log('未提交')
-      }
-    })
-  },
-  resetForm(formName){
-    this.$refs[formName].resetFields()
-  },
-  handleChange(value){
-    this.subForm.code=value
-  }
+          axios.post('/api/inventory/sub', this.subForm)
+            .then(response => {
+              const a = JSON.stringify(response)
+              const respData = JSON.parse(a).data
+              if (response.statusText === 'OK') {
+                console.log(respData.msg)
+                this.$notify({
+                  title: '出库成功',
+                  message: '信息:' + this.subForm.code + '/' + this.subForm.name + '/' + this.subForm.allocation + '/' + this.subForm.acount + '/' + this.subForm.remark,
+                  type: 'success'
+                })
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    },
+    handleChange (value) {
+      this.subForm.code = value
+    }
   }
 }
 </script>

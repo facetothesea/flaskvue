@@ -35,58 +35,63 @@ export default {
   name: 'SafetyAdd',
   data () {
     return {
-      nameOptions:[
-        {
-          value: '101',
-          label: '电池12'
-        }, {
-          value: '102',
-          label: '电池20'
-        }
-      ],
-      safeAddForm:{
+      nameOptions: [ {} ],
+      safeAddForm: {
         code: '',
         name: '',
         acount: '',
         remark: ''
       },
-      rules:{
-        name:[
-          { required: true, message:"不能为空",trigger:'blur'}
+      rules: {
+        name: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        code:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        code: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        acount:[
-          {required:true,pattern:/^\d{1,9}$/,message:'整数,最多9位'}
+        acount: [
+          {required: true, pattern: /^\d{1,9}$/, message: '整数,最多9位'}
         ]
       }
     }
   },
+  mounted: function () {
+    axios.get('/api/getMaterials')
+      .then(response => {
+        this.nameOptions = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+  },
   methods: {
-  submitForm(formName){
-    this.$refs[formName].validate((valid)=>{
-      if (valid){
-        // 1.提交至操作记录表；
-        // 2.更新当前库存表；
-        // 3.更新页面显示数据；
-        this.$notify({
-          title: '创建'+this.safeAddForm.name+'成功',
-          message: '信息:'+this.safeAddForm.code+"/"+this.safeAddForm.name+"/"+this.safeAddForm.pcs+"/"+this.safeAddForm.state+"/"+this.safeAddForm.remark,
-          type: 'success'
-        });
-      }else{
-        // this.$alert('提交失败,请联系管理员',"未提交")
-        console.log('未提交')
-      }
-    })
-  },
-  resetForm(formName){
-    this.$refs[formName].resetFields()
-  },
-  handleChange(value){
-    this.safeAddForm.code=value
-  }
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          axios.post('/api/safety/add', this.safeAddForm)
+            .then(response => {
+              const a = JSON.stringify(response)
+              const respData = JSON.parse(a).data
+              if (response.statusText === 'OK') {
+                console.log(respData.msg)
+                this.$notify({
+                  title: '安全库存添加成功',
+                  message: '信息:' + this.safeAddForm.code + '/' + this.safeAddForm.name + '/' + this.safeAddForm.acount + '/' + this.safeAddForm.remark,
+                  type: 'success'
+                })
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    },
+    handleChange (value) {
+      this.safeAddForm.code = value
+    }
   }
 }
 </script>

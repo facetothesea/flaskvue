@@ -44,65 +44,77 @@ export default {
   name: 'MaterialAdd',
   data () {
     return {
-      pcsOption:[
-        { value:'0', label:'件' },
-        { value:'1', label:'托' },
-        { value:'2', label:'箱' },
-        { value:'3', label:'支' },
-        { value:'4', label:'组' },
-        { value:'5', label:'卷' }
-      ],
-      stateOption:[
-        { value:'1', label:'启用'},
-        { value:'0', label:'停用'}
-      ],
-      matAddForm:{
+      pcsOption: [ {} ],
+      stateOption: [ {} ],
+      matAddForm: {
         code: '',
         name: '',
         state: '',
         pcs: '',
         remark: ''
       },
-      rules:{
-        name:[
-          { required: true, message:"不能为空",trigger:'blur'}
+      rules: {
+        name: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        code:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        code: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        pcs:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        pcs: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        state:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        state: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ]
       }
     }
   },
+  mounted: function () {
+    axios.get('/api/getpcss')
+      .then(response => {
+        this.pcsOption = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+    axios.get('/api/getstates')
+      .then(response => {
+        this.stateOption = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+  },
   methods: {
-  submitForm(formName){
-    this.$refs[formName].validate((valid)=>{
-      if (valid){
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
         // 1.提交至操作记录表；
         // 2.更新当前库存表；
         // 3.更新页面显示数据；
-        this.$notify({
-          title: '创建'+this.matAddForm.name+'成功',
-          message: '信息:'+this.matAddForm.code+"/"+this.matAddForm.name+"/"+this.matAddForm.pcs+"/"+this.matAddForm.state+"/"+this.matAddForm.remark,
-          type: 'success'
-        });
-      }else{
-        // this.$alert('提交失败,请联系管理员',"未提交")
-        console.log('未提交')
-      }
-    })
-  },
-  resetForm(formName){
-    this.$refs[formName].resetFields()
-  },
-  handleChange(value){
-    this.addForm.code=value
-  }
+          axios.post('/api/material/add', this.matAddForm)
+            .then(response => {
+              const a = JSON.stringify(response)
+              const respData = JSON.parse(a).data
+              if (response.statusText === 'OK') {
+                console.log(respData.msg)
+                this.$notify({
+                  title: '物料创建成功',
+                  message: '信息:' + this.matAddForm.code + '/' + this.matAddForm.name + '/' + this.matAddForm.state + '/' + this.matAddForm.remark,
+                  type: 'success'
+                })
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    },
+    handleChange (value) {
+      this.addForm.code = value
+    }
   }
 }
 </script>

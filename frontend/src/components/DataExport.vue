@@ -7,9 +7,9 @@
 <script>
 export default {
   name: 'DataExport',
-  data() {
+  data () {
     return {
-      flag: "a"
+      flag: 'a'
     }
   }
 }

@@ -62,21 +62,20 @@
         </el-tabs>
       </el-col>
 
-
     </el-row>
   </div>
 </template>
 
 <script>
 
-import addmaterial from "./material/MaterialAdd.vue"
-import modifymaterial from "./material/MaterialModify.vue"
+import addmaterial from './material/MaterialAdd.vue'
+import modifymaterial from './material/MaterialModify.vue'
 
 export default{
-  name: "Material",
-  data(){
+  name: 'Material',
+  data () {
     return {
-      activeName:"first",
+      activeName: 'first',
       tableData: [
         { code: '10101', name: '电池12', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
         { code: '10102', name: '电池20', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
@@ -84,13 +83,13 @@ export default{
         { code: '10404', name: '电池32', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
         { code: '10101', name: '电池39', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
         { code: '10301', name: '电池40', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' }
-      ],
-      }
-    },
+      ]
+    }
+  },
   components: {
     addmaterial,
     modifymaterial
-    }
+  }
 }
 </script>
 

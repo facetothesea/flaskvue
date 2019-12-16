@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
@@ -13,7 +14,7 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: '192.168.1.139', // can be overwritten by process.env.HOST
+    host: '192.168.125.118', // can be overwritten by process.env.HOST
     port: 9000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -29,8 +30,8 @@ module.exports = {
     showEslintErrorsInOverlay: false,
 
     /**
-     * Source Maps
-     */
+         * Source Maps
+         */
 
     // https://webpack.js.org/configuration/devtool/#development
     devtool: 'cheap-module-eval-source-map',
@@ -53,8 +54,8 @@ module.exports = {
     assetsPublicPath: '/',
 
     /**
-     * Source Maps
-     */
+         * Source Maps
+         */
 
     productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production

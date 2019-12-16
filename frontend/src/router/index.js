@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -13,8 +14,6 @@ import SafetyInventory from '@/components/SafetyInventory.vue'
 import StorageSpace from '@/components/StorageSpace.vue'
 
 import Material from '@/components/Material.vue'
-// import MaterialAdd from '@/components/material/MaterialAdd'
-// import MaterialModify from '@/components/material/MaterialModify'
 
 Vue.use(Router)
 
@@ -55,16 +54,6 @@ export default new Router({
     name: 'materialmgmt',
     component: Material
   },
-  // {
-  //   path: '/materialmodify',
-  //   name: 'materialmodify',
-  //   component: MaterialModify
-  // },
-  // {
-  //   path: '/materialadd',
-  //   name: 'materialadd',
-  //   component: MaterialAdd
-  // },
   {
     path: '/others',
     name: 'others',

@@ -31,46 +31,56 @@ export default {
   name: 'StorageAdd',
   data () {
     return {
-      stateOption:[
-        { value:'1', label:'启用'},
-        { value:'0', label:'停用'}
-      ],
-      allocationAddForm:{
+      stateOption: [ {} ],
+      allocationAddForm: {
         allocation: '',
         state: '',
         remark: ''
       },
-      rules:{
-        allocation:[
-          { required: true, message:"不能为空",trigger:'blur'}
+      rules: {
+        allocation: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        state:[
-          {required:true,message:"不能为空",trigger:'blur'}
+        state: [
+          {required: true, message: '不能为空', trigger: 'blur'}
         ]
       }
     }
   },
-  methods: {
-  submitForm(formName){
-    this.$refs[formName].validate((valid)=>{
-      if (valid){
-        // 1.提交至操作记录表；
-        // 2.更新当前库存表；
-        // 3.更新页面显示数据；
-        this.$notify({
-          title: '创建'+this.allocationAddForm.allocation+'成功',
-          message: '信息:'+this.allocationAddForm.allocation+this.allocationAddForm.state+"/"+this.allocationAddForm.remark,
-          type: 'success'
-        });
-      }else{
-        // this.$alert('提交失败,请联系管理员',"未提交")
-        console.log('未提交')
-      }
-    })
+  mounted: function () {
+    axios.get('/api/getstates')
+      .then(response => {
+        this.stateOption = response.data
+      }).catch(error => {
+        console.log(error)
+      })
   },
-  resetForm(formName){
-    this.$refs[formName].resetFields()
-  }
+  methods: {
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          axios.post('/api/allocation/add', this.allocationAddForm)
+            .then(response => {
+              const a = JSON.stringify(response)
+              const respData = JSON.parse(a).data
+              if (response.statusText === 'OK') {
+                console.log(respData.msg)
+                this.$notify({
+                  title: '货位添加成功',
+                  message: '信息:' + this.allocationAddForm.allocation + '/' + this.allocationAddForm.state + '/' + this.allocationAddForm.remark,
+                  type: 'success'
+                })
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      })
+    },
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+    }
   }
 }
 </script>
