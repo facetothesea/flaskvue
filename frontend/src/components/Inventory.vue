@@ -48,7 +48,7 @@
 import additem from './inventory/InventoryAdd.vue'
 import subitem from './inventory/InventorySubtract.vue'
 import chgitem from './inventory/InventoryChange.vue'
-
+import axios from 'axios'
 export default{
   name: 'Inventory',
   data () {
@@ -56,143 +56,123 @@ export default{
       storeData: {
         'A': {
           '01A': [ ],
-          '02A': [
-            { code: '001', name: '电池12', acount: 100 },
-            { code: '003', name: '电池120', acount: 1000 } ],
-          '03A': [ { code: '001', name: '电池12', acount: 100 },
-            { code: '010', name: '电池110', acount: 1100 },
-            { code: '011', name: '电池2', acount: 10 }],
-          '04A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '05A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '06A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '07A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '08A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '09A': [
-            { code: '001', name: '电池12', acount: 100 }],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
           '10A': [ ]
         },
         'B': {
-          '01A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '02A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '03A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '04A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '05A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '06A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '07A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '08A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '09A': [
-            { code: '001', name: '电池12', acount: 100 }],
-          '10A': [
-            { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'C': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
-        'D': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+        'D':{
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'E': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'F': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'G': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'H': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'I': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'J': {
-          '01A': [ { code: '001', name: '电池12', acount: 100 }],
-          '02A': [ { code: '001', name: '电池12', acount: 100 }],
-          '03A': [ { code: '001', name: '电池12', acount: 100 }],
-          '04A': [ { code: '001', name: '电池12', acount: 100 }],
-          '05A': [ { code: '001', name: '电池12', acount: 100 }],
-          '06A': [ { code: '001', name: '电池12', acount: 100 }],
-          '07A': [ { code: '001', name: '电池12', acount: 100 }],
-          '08A': [ { code: '001', name: '电池12', acount: 100 }],
-          '09A': [ { code: '001', name: '电池12', acount: 100 }],
-          '10A': [ { code: '001', name: '电池12', acount: 100 }]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         }
       },
       now: '',
@@ -201,11 +181,23 @@ export default{
       activeName: 'first'
     }
   },
+  mounted(){
+    this.updateData()
+  },
   methods: {
     showDrawer (data, now) {
       this.drawerData = data
       this.drawer = true
       this.now = now
+    },
+    updateData() {
+    axios.get('/api/inventory/getList')
+      .then(response => {
+        this.storeData = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     }
   },
   components: {

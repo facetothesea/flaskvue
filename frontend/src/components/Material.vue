@@ -70,25 +70,32 @@
 
 import addmaterial from './material/MaterialAdd.vue'
 import modifymaterial from './material/MaterialModify.vue'
-
+import axios from 'axios'
 export default{
   name: 'Material',
   data () {
     return {
       activeName: 'first',
-      tableData: [
-        { code: '10101', name: '电池12', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
-        { code: '10102', name: '电池20', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
-        { code: '10303', name: '电池15', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
-        { code: '10404', name: '电池32', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
-        { code: '10101', name: '电池39', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' },
-        { code: '10301', name: '电池40', pcs: '0', state: '1', remark: '初始化', lastdt: '2019-12-14 13:03:01' }
-      ]
+      tableData: [{}]
     }
+  },
+  mounted(){
+    this.updateData()
   },
   components: {
     addmaterial,
     modifymaterial
+  },
+  methods:{
+    updateData() {
+    axios.get('/api/material/getList')
+      .then(response => {
+        this.tableData = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>

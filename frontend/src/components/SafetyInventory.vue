@@ -15,7 +15,7 @@
             prop="code"
             label="编号"
             sortable
-            width="180">
+            width="120">
           </el-table-column>
           <el-table-column
             prop="name"
@@ -26,7 +26,7 @@
           <el-table-column
             prop="acount"
             label="数量"
-            width="180"
+            width="80"
             sortable>
           </el-table-column>
           <el-table-column
@@ -62,33 +62,34 @@
 <script>
 import safeadd from "./safety/SafetyAdd.vue"
 import safemodify from "./safety/SafetyModify.vue"
-
+import axios from "axios"
 export default{
   name: "SafetyInventory",
   data(){
     return {
       activeName:'first',
-      tableData: [
-        { code: '1001', name: '1001', acount: '9000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1002', name: '1002', acount: '8000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1003', name: '1003', acount: '7000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1004', name: '1004', acount: '6000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1005', name: '1005', acount: '5000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1006', name: '1006', acount: '4000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1007', name: '1007', acount: '3000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1008', name: '1008', acount: '2000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1009', name: '1009', acount: '1000', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1010', name: '1010', acount: '900', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1011', name: '1011', acount: '800', remark: '初始化1', lastdt: '2019-12-14 13:03:01' },
-        { code: '1012', name: '1012', acount: '700', remark: '初始化1', lastdt: '2019-12-14 13:03:01' }
-      ],
+      tableData: [{}],
       activeName:'first'
       }
     },
     components: {
       safeadd,
       safemodify
-      }
+    },
+  mounted(){
+    this.updateData()
+  },
+  methods:{
+    updateData() {
+    axios.get('/api/safety/getList')
+      .then(response => {
+        this.tableData = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
+  }
 }
 </script>
 

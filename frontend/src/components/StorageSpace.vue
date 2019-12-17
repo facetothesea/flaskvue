@@ -59,24 +59,33 @@
 
 import addstorage from "./storage/StorageAdd.vue"
 import modifystorage from "./storage/StorageModify.vue"
-
+import axios from 'axios'
 export default{
   name: "Material",
   data(){
     return {
       activeName:'first',
-      tableData: [
-        { allocation: 'A01A', state: '1', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'},
-        { allocation: 'A02A', state: '0', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'},
-        { allocation: 'A91A', state: '1', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'},
-        { allocation: 'A71A', state: '1', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'}
-      ],
+      tableData: [ {} ],
       }
     },
   components: {
     addstorage,
     modifystorage
+    },
+  mounted(){
+    this.updateData()
+  },
+  methods:{
+    updateData() {
+    axios.get('/api/storage/getList')
+      .then(response => {
+        this.tableData = response.data
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
     }
+  }
 }
 </script>
 
