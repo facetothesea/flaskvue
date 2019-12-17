@@ -28,42 +28,17 @@ const proxy = {
     'A': {
       '01A': [ ],
       '02A': [
-        { code: '001', name: '电池12', acount: 100 },
-        { code: '003', name: '电池120', acount: 1000 } ],
-      '03A': [ { code: '001', name: '电池12', acount: 100 },
+        { code: '001', name: '电池12', acount: 999 },
+        { code: '003', name: '电池120', acount: 3000 } ],
+      '03A': [ { code: '001', name: '电池12', acount: 1000 },
         { code: '010', name: '电池110', acount: 1100 },
-        { code: '011', name: '电池2', acount: 10 }],
-      '04A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '05A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '06A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '07A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '08A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '09A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '10A': [ ]
+        { code: '011', name: '电池2', acount: 10 }]
     },
     'B': {
-      '01A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '02A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '03A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '04A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '05A': [
-        { code: '001', name: '电池12', acount: 100 }],
-      '06A': [
-        { code: '001', name: '电池12', acount: 100 }],
       '07A': [
-        { code: '001', name: '电池12', acount: 100 }],
+        { code: '001', name: '电池12', acount: 1000 }],
       '08A': [
-        { code: '001', name: '电池12', acount: 100 }],
+        { code: '001', name: '电池12', acount: 1000 }],
       '09A': [
         { code: '001', name: '电池12', acount: 100 }],
       '10A': [
@@ -73,7 +48,7 @@ const proxy = {
       '01A': [ { code: '001', name: '电池12', acount: 100 }],
       '02A': [ { code: '001', name: '电池12', acount: 100 }],
       '03A': [ { code: '001', name: '电池12', acount: 100 }],
-      '04A': [ { code: '001', name: '电池12', acount: 100 }],
+      '04A': [ { code: '001', name: '电池12', acount: 3000 }],
       '05A': [ { code: '001', name: '电池12', acount: 100 }],
       '06A': [ { code: '001', name: '电池12', acount: 100 }],
       '07A': [ { code: '001', name: '电池12', acount: 100 }],
@@ -82,7 +57,7 @@ const proxy = {
       '10A': [ { code: '001', name: '电池12', acount: 100 }]
     },
     'D': {
-      '01A': [ { code: '001', name: '电池12', acount: 100 }],
+      '01A': [ { code: '001', name: '电池12', acount: 2500 }],
       '02A': [ { code: '001', name: '电池12', acount: 100 }],
       '03A': [ { code: '001', name: '电池12', acount: 100 }],
       '04A': [ { code: '001', name: '电池12', acount: 100 }],
@@ -94,22 +69,22 @@ const proxy = {
       '10A': [ { code: '001', name: '电池12', acount: 100 }]
     },
     'E': {
-      '01A': [ { code: '001', name: '电池12', acount: 100 }],
+      '01A': [ { code: '001', name: '电池12', acount: 9999 }],
       '02A': [ { code: '001', name: '电池12', acount: 100 }],
       '03A': [ { code: '001', name: '电池12', acount: 100 }],
       '04A': [ { code: '001', name: '电池12', acount: 100 }],
       '05A': [ { code: '001', name: '电池12', acount: 100 }],
       '06A': [ { code: '001', name: '电池12', acount: 100 }],
-      '07A': [ { code: '001', name: '电池12', acount: 100 }],
+      '07A': [ { code: '001', name: '电池12', acount: 10 }],
       '08A': [ { code: '001', name: '电池12', acount: 100 }],
       '09A': [ { code: '001', name: '电池12', acount: 100 }],
       '10A': [ { code: '001', name: '电池12', acount: 100 }]
     },
     'F': {
-      '01A': [ { code: '001', name: '电池12', acount: 100 }],
+      '01A': [ { code: '001', name: '电池12', acount: 500 }],
       '02A': [ { code: '001', name: '电池12', acount: 100 }],
       '03A': [ { code: '001', name: '电池12', acount: 100 }],
-      '04A': [ { code: '001', name: '电池12', acount: 100 }],
+      '04A': [ { code: '001', name: '电池12', acount: 15600 }],
       '05A': [ { code: '001', name: '电池12', acount: 100 }],
       '06A': [ { code: '001', name: '电池12', acount: 100 }],
       '07A': [ { code: '001', name: '电池12', acount: 100 }],
