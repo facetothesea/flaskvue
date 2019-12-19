@@ -1,25 +1,12 @@
-from flask import Flask,render_template,jsonify
-from random import *
-from flask_cors import CORS
-
-app=Flask(__name__,static_folder="../dist/static",template_folder="../dist")
-cors=CORS(app,resources={r"/api/*":{"origins":"*"}})
-
-@app.route('/api/random')
-def random_number():
-    response={
-        'randomNumber':randint(1,100)
-    }
-    return jsonify(response)
-
-
-@app.route('/',defaults={'path':''})
-@app.route('/<path:path>')
-def catch_all(path):
-    return render_template('index.html')
-
-# FLASK_APP=run.py FLASK_DEBUG=1 flask run
-
+from api import app
 
 if __name__=="__main__":
     app.run()
+
+# for windows
+# set FLASK_APP=run.py
+# flask run
+
+# for linux
+# export FLASK_APP=run.py
+# flask run
