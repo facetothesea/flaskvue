@@ -1,7 +1,8 @@
 from api import db
+from datetime import datetime
 
 class Material(db.Model):
-    __tablename__='material'
+    __tablename__='material' #物料表
     
     id=db.Column(db.Integer,primary_key=True)
     code=db.Column(db.String(20))
@@ -9,40 +10,54 @@ class Material(db.Model):
     pcs=db.Column(db.String(1))
     state=db.Column(db.String(1))
     remark=db.Column(db.String(200))
-    lastdt=db.Column(db.String(20))
+    lastdt=db.Column(db.DateTime,default=datetime.utcnow)
+    inventory=db.relationship('Inventory',backref='mat',lazy='dynamic')   
 
     def __repr__(self):
-        return '<Material 物料 {} >'.format(self.name)
+        return '<Material 物料 {} >'.format(self.material_name)
 
 class Storage(db.Model):
-    __tablename__='storage'
+    __tablename__='storage' #货位表
 
     id=db.Column(db.Integer,primary_key=True)
-    allocaton=db.Column(db.String(10))
+    allocation=db.Column(db.String(10))
     state=db.String(db.String(1))
     remark=db.String(db.String(200))
-    lastdt=db.String(db.String(20))
+    lastdt=db.Column(db.DateTime,default=datetime.utcnow)
+    inventory=db.relationship('Inventory',backref='sto',lazy='dynamic')
 
     def __repr__(self):
         return '<Storage 货位 {} >'.format(self.allocation)
 
+class Inventory(db.Model):
+    __tablename__='inventory' #当前库存表
+    
+    id=db.Column(db.Integer,primary_key=True)
+    code=db.Column(db.String(10))
+    name=db.Column(db.String(30))
+    inventory_acount=db.Column(db.Integer,default=0)
+    material_id=db.Column(db.Integer,db.ForeignKey('material.id'))
+    storage_id=db.Column(db.Integer,db.ForeignKey('storage.id'))
+    lastdt=db.Column(db.DateTime,default=datetime.utcnow)
+    
+    def __repr__(self):
+        return '< Inventory 库存 {} {} {} > '.format(self.material_code,self.material_name,self.material_acount)
+
+
 class Safety(db.Model):
-    __tablename__='safety'
+    __tablename__='safety' #安全库存表
 
     id=db.Column(db.Integer,primary_key=True)
     code=db.Column(db.String(10))
     name=db.Column(db.String(30))
     acount=db.Column(db.String(10))
     remark=db.Column(db.String(200))
-    lastdt=db.Colun(db.String(20))
+    lastdt=db.Column(db.DateTime,default=datetime.utcnow)
 
-class Inventor(db.Model):
-    __tablename__='inventory'
-    
+
+
+class History(db.Model):
+    __tablename__='history'
+
     id=db.Column(db.Integer,primary_key=True)
-    material_code=db.Column(db.String(10))
-    material_name=db.Column(db.String(30))
-    inventory_acount=db.Column(db.Integer)
-    
-    def __repr__(self):
-        return '< Inventory 库存 {} {} {} > '.format(self.material_code,self.material_name,self.material_acount)
+    lastdt=db.Column(db.DateTime,default=datetime.utcnow)
