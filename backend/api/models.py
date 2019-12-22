@@ -1,6 +1,14 @@
 from api import db
 from datetime import datetime
 
+# class Status(db.Model):
+#     __tablename__='status'
+#     describe=db.Column(db.Enum('停用','启用'),primary_key=True)
+
+class Packages(db.Model):
+    __tablename__='status'
+    describe=db.Column(db.Enum('千克','件','托','箱','只','支','组','卷','立方米','平方米'),primary_key=True)
+
 class Material(db.Model):
     __tablename__='material' #物料表
     
