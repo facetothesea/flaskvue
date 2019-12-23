@@ -2,7 +2,7 @@
   <div>
     <el-form :model="matAddForm" :rules='rules' ref="matAddForm"  label-position="right" label-width="50px">
       <el-form-item prop="code" size="mini"  label="编号">
-        <el-input v-model="matAddForm.code"></el-input>
+        <el-input v-model="matAddForm.code" disabled></el-input>
       </el-form-item>
       <el-form-item prop="name" size="mini"  label="名称">
         <el-input v-model="matAddForm.name"></el-input>
@@ -57,9 +57,6 @@ export default {
         name: [
           {required: true, message: '不能为空', trigger: 'blur'}
         ],
-        code: [
-          {required: true, message: '不能为空', trigger: 'blur'}
-        ],
         pcs: [
           {required: true, message: '不能为空', trigger: 'blur'}
         ],
@@ -95,7 +92,6 @@ export default {
               const a = JSON.stringify(response)
               const respData = JSON.parse(a).data
               if (response.statusText === 'OK') {
-                console.log(respData.msg)
                 this.$notify({
                   title: '物料创建成功',
                   message: '信息:' + this.matAddForm.code + '/' + this.matAddForm.name + '/' + this.matAddForm.state + '/' + this.matAddForm.remark,

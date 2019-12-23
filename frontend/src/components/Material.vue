@@ -79,22 +79,21 @@ export default{
       tableData: [{}]
     }
   },
-  mounted(){
+  mounted () {
     this.updateData()
   },
   components: {
     addmaterial,
     modifymaterial
   },
-  methods:{
-    updateData() {
-    axios.get('/api/material/getList')
-      .then(response => {
-        this.tableData = response.data
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
+  methods: {
+    updateData () {
+      axios.get('/api/material/getList')
+        .then(response => {
+          this.tableData = response.data
+        }).catch(error => {
+          console.log(error)
+        })
     }
   }
 }

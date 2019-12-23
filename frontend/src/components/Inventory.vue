@@ -7,7 +7,7 @@
       <el-col :span="15" :offset="1" class="leftpan">
         <el-row v-for="(o, i) in storeData" :key="i">
           <el-col :span="2" v-for="(r,j) in o" :key="j">
-            <el-tooltip placement="top" effect="dark" open-delay=300 hide-after=2000 >
+            <el-tooltip placement="top" effect="dark"> <!-- open-delay=300 hide-after=2000 -->
               <div slot="content">{{ acountData[i][j] }}</div>
               <el-button @click="showDrawer(r,i,j)" type="primary" class="btnshow" :key="i+j" :style="{'background-color': colorList[Math.floor(acountData[i][j]/(acountMax/9))]}">{{(i+j).slice(0,4)}} </el-button>
             </el-tooltip>
@@ -56,8 +56,8 @@ export default{
   name: 'Inventory',
   data () {
     return {
-      acountMax:0,
-      colorList:[ //颜色从浅到深，共10个颜色
+      acountMax: 0,
+      colorList: [ // 颜色从浅到深，共10个颜色
         // '#ffffff',
         '#fff5ee',
         '#fdf5e6',
@@ -70,58 +70,138 @@ export default{
         '#ff7f50',
         '#ff4500'
       ],
-      acountData:{
-        'A': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'B': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'C': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'D': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'E': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'F': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'G': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'H': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'I': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
-        'J': {'01A': 0, '02A':0, '03A': 0, '04A': 0, '05A': 0,'06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0}
+      acountData: {
+        'A': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'B': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'C': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'D': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'E': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'F': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'G': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'H': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'I': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0},
+        'J': {'01A': 0, '02A': 0, '03A': 0, '04A': 0, '05A': 0, '06A': 0, '07A': 0, '08A': 0, '09A': 0, '10A': 0}
       },
       storeData: {
         'A': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'B': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'C': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
-        'D':{
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+        'D': {
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'E': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'F': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'G': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'H': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'I': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         },
         'J': {
-          '01A': [ ], '02A': [ ], '03A': [ ], '04A': [ ], '05A': [ ],
-          '06A': [ ], '07A': [ ], '08A': [ ], '09A': [ ], '10A': [ ]
+          '01A': [ ],
+          '02A': [ ],
+          '03A': [ ],
+          '04A': [ ],
+          '05A': [ ],
+          '06A': [ ],
+          '07A': [ ],
+          '08A': [ ],
+          '09A': [ ],
+          '10A': [ ]
         }
       },
       now: '',
@@ -132,49 +212,48 @@ export default{
       activeName: 'first'
     }
   },
-  mounted(){
+  mounted () {
     this.updateData()
   },
   methods: {
-    showDrawer (data, i,j) {
+    showDrawer (data, i, j) {
       this.drawerData = data
       this.drawer = true
-      this.now = i+j
-      this.i=i
-      this.j=j
+      this.now = i + j
+      this.i = i
+      this.j = j
     },
-    updateData() {
-    axios.get('/api/inventory/getList')
-      .then(response => {
+    updateData () {
+      axios.get('/api/inventory/getList')
+        .then(response => {
         // this.storeData = response.data
         // 获取后赋值
-        for(var key in this.storeData){
-          // console.log(key)
-          for(var val in this.storeData[key]){
-            // console.log(val)
-            if ((key in response.data) && (val in response.data[key])){
-              this.storeData[key][val]=response.data[key][val]
-              if(response.data[key][val].length>0){
-                var temp=0
-                for(var i=0;i< response.data[key][val].length;i++){
-                  temp=temp+response.data[key][val][i]["acount"]
-                }
-                // console.log(temp)
-                this.acountData[key][val]=temp
-                if(temp>this.acountMax){
-                  this.acountMax=temp
+          for (var key in this.storeData) {
+            // console.log(key)
+            for (var val in this.storeData[key]) {
+              // console.log(val)
+              if ((key in response.data) && (val in response.data[key])) {
+                this.storeData[key][val] = response.data[key][val]
+                if (response.data[key][val].length > 0) {
+                  var temp = 0
+                  for (var i = 0; i < response.data[key][val].length; i++) {
+                    temp = temp + response.data[key][val][i]['acount']
+                  }
+                  // console.log(temp)
+                  this.acountData[key][val] = temp
+                  if (temp > this.acountMax) {
+                    this.acountMax = temp
+                  }
                 }
               }
-            }else{
-              response.data[key][val]=[]
+              // else {
+              //   response.data[key][val] = []
+              // }
             }
           }
-        }
-        // console.log(this.acountData)
-        // console.log(this.acountMax)
-      }).catch(error => {
-        console.log(error)
-      })
+        }).catch(error => {
+          console.log(error)
+        })
     }
   },
   components: {
