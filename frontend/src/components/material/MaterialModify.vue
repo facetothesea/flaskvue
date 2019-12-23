@@ -15,6 +15,9 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item prop="name2" size="mini"  label="新名">
+        <el-input v-model="matModForm.name2" placeholder="为空时不更改"></el-input>
+      </el-form-item>
       <el-form-item prop="pcs" size="mini"  label="包装">
         <el-select v-model="matModForm.pcs" filterable placeholder="请选择">
           <el-option
@@ -58,6 +61,7 @@ export default {
       matModForm: {
         code: '',
         name: '',
+        name2: '',
         state: '',
         pcs: '',
         remark: ''
