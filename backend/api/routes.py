@@ -1,7 +1,7 @@
 from api import app, db
 from flask import render_template, jsonify, request, Response
 from api.models import Material, State, Inventory, Safety, Storage, Package
-from sqlalchemy import func
+from sqlalchemy import func,and_,or_
 from random import randint
 from datetime import datetime
 
@@ -145,7 +145,32 @@ def getsafety():
 
 @app.route('/api/inventory/add', methods=['POST'])
 def inv_add():
-    pass
+    post_data = request.get_json()
+    code = post_data['code']
+    name = db.session.query(Material).filter(Material.id==code).first().name
+    allocation = post_data['allocation']
+    acount = post_data['acount']
+    remark = post_data['remark']
+    inv=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation)).all()
+    if len(inv)>0:  #有记录则做归并操作
+        inv[0].inventory_acount+=int(acount)
+        db.session.commit()
+    else:   #无记录则添加
+        new_inv=Inventory(code=code,name=name,allocation=allocation,inventory_acount=acount,remark=remark)
+        db.session.add(new_inv)
+        db.session.commit()
+    return jsonify({
+        'status': 'ok',
+        'code': 0,
+        'msg': '入库成功',
+        'data': {
+            'code': code,
+            'name': name,
+            'allocation': allocation,
+            'acount': acount,
+            'remark': remark
+        }
+    })
 
 
 @app.route('/api/inventory/sub', methods=['POST'])
@@ -243,18 +268,72 @@ def all_add():
 
 @app.route('/api/allocation/mod', methods=['POST'])
 def all_mod():
-    pass
+    if request.method == 'POST':
+        post_data=request.get_json()
+        allocation=post_data['allocation']
+        state = State.query.filter(State.id == post_data['state']).first().describe
+        remark = post_data['remark']
+        sto=db.session.query(Storage).filter(Storage.allocation==allocation).first()     
+        if sto.state != state:
+            sto.state=state
+            sto.remark=remark
+            sto.lastdt=datetime.utcnow()
+            db.session.commit()
+            return jsonify({
+                'status': 'ok',
+                'code': 0,
+                'msg': '货位添加成功',
+                'data': { 'allocation':allocation,'state':state,'remark':remark}
+                })
+        else:
+            return jsonify({
+                'status': 'error',
+                'code': 1,
+                'msg': '状态未更改',
+                'data': { 'allocation':allocation}
+                })
 
-
-@app.route('/api/safety/add', methods=['POST'])
-def saf_add():
-    pass
+@app.route('/api/safety/mat', methods=['GET'])
+def safe_mat_get():
+    mat = Safety.query.all()
+    result = []
+    for s in mat:
+        result.append({'value': s.id, 'label': s.name})
+    return jsonify(result)
 
 
 @app.route('/api/safety/mod', methods=['POST'])
-def saf_mod():
-    pass
-
+@app.route('/api/safety/add', methods=['POST'])
+def saf_add():
+    if request.method == 'POST':
+        post_data=request.get_json()
+        code=post_data['code']
+        remark = post_data['remark']
+        acount = post_data['acount']
+        saf=db.session.query(Safety).filter(Safety.code==code).first()        
+        if saf :  #存在则更新
+            saf.acount=acount
+            saf.remark=remark
+            saf.lastdt=datetime.utcnow()
+            db.session.commit()
+            name=saf.name
+            return jsonify({
+                'status': 'ok',
+                'code': 0,
+                'msg': '已存在，更新成功',
+                'data': { 'code':code,'name':name,'remark':remark,'acount':acount}
+                })
+        else:  # 不存在则添加
+            mat=db.session.query(Material).filter(Material.id==code).first()
+            saf=Safety(code=code,name=mat.name,remark=remark,acount=acount)
+            db.session.add(saf)
+            db.session.commit()
+            return jsonify({
+                'status': 'ok',
+                'code': 0,
+                'msg': '添加成功',
+                'data': { 'code':code,'name':mat.name,'remark':remark,'acount':acount}
+                })
 
 # restful apis end
 

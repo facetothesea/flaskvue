@@ -73,7 +73,7 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          axios.post('/api/allocation/add', this.allocationModifyForm)
+          axios.post('/api/allocation/mod', this.allocationModifyForm)
             .then(response => {
               const a = JSON.stringify(response)
               const respData = JSON.parse(a).data

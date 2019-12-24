@@ -56,7 +56,7 @@ export default {
     }
   },
   mounted: function () {
-    axios.get('/api/getMaterials')
+    axios.get('/api/safety/mat')
       .then(response => {
         this.nameOptions = response.data
       }).catch(error => {

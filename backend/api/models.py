@@ -64,6 +64,7 @@ class Inventory(db.Model):
     code = db.Column(db.String(10))  #物料编号
     name = db.Column(db.String(30))  #物料描述
     inventory_acount = db.Column(db.Integer, default=0)  #数量
+    remark =db.Column(db.String,default="")
     lastdt = db.Column(db.DateTime, default=datetime.utcnow)  #修改时间
 
     # mat=db.relationship('Material',backref='mat',lazy='dynamic')
