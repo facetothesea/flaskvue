@@ -109,7 +109,7 @@ export default{
               const a = JSON.stringify(response)
               const respData = JSON.parse(a).data
               if (response.statusText === 'OK') {
-                console.log(respData.msg)
+                // console.log(respData.msg)
                 this.$notify({
                   title: '移库成功',
                   message: '信息:' + this.moveForm.code + '/' + this.moveForm.name + '/' + this.moveForm.allocationFrom + '/' + this.moveForm.allocationTo + '/' + this.moveForm.acount + '/' + this.moveForm.remark,

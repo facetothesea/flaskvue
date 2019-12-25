@@ -8,7 +8,7 @@
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b">
-      <el-menu-item index="/" disabled>简易WMS</el-menu-item>
+      <el-menu-item index="/">简易WMS</el-menu-item>
       <el-submenu index="2">
         <template slot="title">基本管理</template>
         <el-menu-item index="/materialmgmt">物料管理</el-menu-item>
@@ -29,7 +29,7 @@ export default {
   name: 'App',
   data () {
     return {
-      activeIndex: '/inventorymgmt'
+      activeIndex: '/'
     }
   }
 }

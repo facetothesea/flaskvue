@@ -102,7 +102,7 @@ export default {
               const a = JSON.stringify(response)
               const respData = JSON.parse(a).data
               if (response.statusText === 'OK') {
-                console.log(respData.msg)
+                // console.log(respData.msg)
                 this.$notify({
                   title: '入库成功',
                   message: '信息:' + this.addForm.code + '/' + this.addForm.name + '/' + this.addForm.allocation + '/' + this.addForm.acount + '/' + this.addForm.remark,

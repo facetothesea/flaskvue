@@ -8,9 +8,7 @@
         <div>已有物料列表</div>
         <el-table
           :data="tableData"
-          style="width: 100%"
-          :default-sort = "{prop: 'allocation', order: 'descending'}"
-          >
+          :default-sort = "{prop: 'allocation', order: 'descending'}">
           <el-table-column
             prop="allocation"
             label="编号"
@@ -20,19 +18,16 @@
           <el-table-column
             prop="state"
             label="状态"
-            width="100"
             sortable>
           </el-table-column>
           <el-table-column
             prop="remark"
             label="备注"
-            width="180"
             sortable>
           </el-table-column>
           <el-table-column
             prop="lastdt"
             label="最后修改"
-            width="180"
             sortable>
           </el-table-column>
         </el-table>

@@ -14,31 +14,26 @@
           <el-table-column
             prop="code"
             label="编号"
-            sortable
-            width="120">
+            sortable>
           </el-table-column>
           <el-table-column
             prop="name"
             label="名称"
-            sortable
-            width="180">
+            sortable>
           </el-table-column>
           <el-table-column
             prop="acount"
             label="数量"
-            width="80"
             sortable>
           </el-table-column>
           <el-table-column
             prop="remark"
             label="备注"
-            width="180"
             sortable>
           </el-table-column>
           <el-table-column
             prop="lastdt"
             label="最后修改"
-            width="180"
             sortable>
           </el-table-column>
         </el-table>
