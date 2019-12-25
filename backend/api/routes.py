@@ -25,7 +25,7 @@ def mat_getlist():
             'pcs': s.pcs,
             'state': s.state,
             'remark': s.remark,
-            'lastdt': s.lastdt
+            'lastdt': datetime.strftime(s.lastdt,"%Y-%m-%d %H:%M:%S")
         })
     return jsonify(result)
 
@@ -35,12 +35,13 @@ def sto_getlist():
     # { allocation: 'A01A', state: '1', remark: '每次都要初始化', lastdt: '2019-12-14 13:03:01'},
     stos = Storage.query.all()
     result = []
+    print(result)
     for s in stos:
         result.append({
             'allocation': s.allocation,
             'state': s.state,
             'remark': s.remark,
-            'lastdt': s.lastdt
+            'lastdt': datetime.strftime(s.lastdt,"%Y-%m-%d %H:%M:%S")
         })
     return jsonify(result)
 
@@ -56,7 +57,7 @@ def saf_getlist():
             'name': s.name,
             'acount': s.acount,
             'remark': s.remark,
-            'lastdt': s.lastdt
+            'lastdt': datetime.strftime(s.lastdt,"%Y-%m-%d %H:%M:%S")
         })
     return jsonify(result)
     return ("/api/storage/getList")
@@ -78,7 +79,7 @@ def inv_getlist():
     inv = db.session.query(Inventory.allocation, Inventory.code,
                            Inventory.name, Inventory.inventory_acount,
                            func.substr(Inventory.allocation, 1, 1),
-                           func.substr(Inventory.allocation, 2, 3)).all()
+                           func.substr(Inventory.allocation, 2, 3)).filter(Inventory.inventory_acount!=0).all()
     result = {}
     for i in inv:
         key1 = i[4]
@@ -111,7 +112,8 @@ def getstatus():
 
 @app.route('/api/getMaterials', methods=['GET'])
 def getmaterials():
-    mat = Material.query.all()
+    # mat = Material.query.all()
+    mat = Material.query.order_by(Material.name).all()
     result = []
     for s in mat:
         result.append({'value': s.id, 'label': s.name})
@@ -120,7 +122,8 @@ def getmaterials():
 
 @app.route('/api/getAllocations', methods=['GET'])
 def getlocations():
-    stos = Storage.query.all()
+    # stos = Storage.query.all()
+    stos = Storage.query.order_by(Storage.allocation).all()
     result = []
     for s in stos:
         result.append({'value': s.allocation})
@@ -149,11 +152,11 @@ def inv_add():
     code = post_data['code']
     name = db.session.query(Material).filter(Material.id==code).first().name
     allocation = post_data['allocation']
-    acount = post_data['acount']
+    acount = int(post_data['acount'])
     remark = post_data['remark']
     inv=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation)).all()
     if len(inv)>0:  #有记录则做归并操作
-        inv[0].inventory_acount+=int(acount)
+        inv[0].inventory_acount+=acount
         db.session.commit()
     else:   #无记录则添加
         new_inv=Inventory(code=code,name=name,allocation=allocation,inventory_acount=acount,remark=remark)
@@ -175,12 +178,76 @@ def inv_add():
 
 @app.route('/api/inventory/sub', methods=['POST'])
 def inv_sub():
-    pass
+    post_data = request.get_json()
+    code = post_data['code']
+    name = db.session.query(Material).filter(Material.id==code).first().name
+    allocation = post_data['allocation']
+    acount = int(post_data['acount'])
+    remark = post_data['remark']
+    inv=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation)).all()
+    if len(inv)>0:  #有记录则做归并操作
+        inv[0].inventory_acount-=acount
+        db.session.commit()
+    else:   #无记录则添加
+        new_inv=Inventory(code=code,name=name,allocation=allocation,inventory_acount=-acount,remark=remark)
+        db.session.add(new_inv)
+        db.session.commit()
+    return jsonify({
+        'status': 'ok',
+        'code': 0,
+        'msg': '出库成功',
+        'data': {
+            'code': code,
+            'name': name,
+            'allocation': allocation,
+            'acount': acount,
+            'remark': remark
+        }
+    })
 
 
 @app.route('/api/inventory/chg', methods=['POST'])
 def inv_chg():
-    pass
+    # 获取表单数据
+    post_data = request.get_json()
+    code = post_data['code']
+    name = db.session.query(Material).filter(Material.id==code).first().name
+    allocation_from = post_data['allocationFrom']
+    allocation_to = post_data['allocationTo']
+    acount = int(post_data['acount'])
+    remark = post_data['remark']
+    # 出库操作
+    inv=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation_from)).all()
+    if len(inv)>0:  #有记录则做归并操作
+        inv[0].inventory_acount-=acount
+        # db.session.commit()
+    else:   #无记录则添加
+        new_inv=Inventory(code=code,name=name,allocation=allocation_from,inventory_acount=-acount,remark=remark)
+        db.session.add(new_inv)
+        # db.session.commit()
+    # 入库操作
+    inv2=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation_to)).all()
+    if len(inv2)>0:  #有记录则做归并操作
+        inv[0].inventory_acount+=acount
+        # db.session.commit()
+    else:   #无记录则添加
+        new_inv=Inventory(code=code,name=name,allocation=allocation_to,inventory_acount=acount,remark=remark)
+        db.session.add(new_inv)
+    # 提交修改
+    db.session.commit()
+    return jsonify({
+        'status': 'ok',
+        'code': 0,
+        'msg': '物料添加成功',
+        'data': {
+            'code': code,
+            'name': name,
+            'allocationFrom':allocation_from,
+            'allocation_to':allocation_to,
+            'acount': acount,
+            'remark': remark
+        }
+    })
 
 
 @app.route('/api/material/add', methods=['POST'])
@@ -340,6 +407,11 @@ def saf_add():
 
 @app.route('/api/random')
 def random_number():
+    response = {'randomNumber': randint(1, 100)}
+    return jsonify(response)
+
+@app.route('/api/getNumber')
+def get_number():
     response = {'randomNumber': randint(1, 100)}
     return jsonify(response)
 
