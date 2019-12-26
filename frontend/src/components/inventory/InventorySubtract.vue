@@ -100,6 +100,7 @@ export default {
                   message: '信息:' + this.subForm.code + '/' + this.subForm.name + '/' + this.subForm.allocation + '/' + this.subForm.acount + '/' + this.subForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

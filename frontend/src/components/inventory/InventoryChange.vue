@@ -115,6 +115,7 @@ export default{
                   message: '信息:' + this.moveForm.code + '/' + this.moveForm.name + '/' + this.moveForm.allocationFrom + '/' + this.moveForm.allocationTo + '/' + this.moveForm.acount + '/' + this.moveForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

@@ -220,21 +220,20 @@ def inv_chg():
     inv=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation_from)).all()
     if len(inv)>0:  #有记录则做归并操作
         inv[0].inventory_acount-=acount
-        # db.session.commit()
+        db.session.commit()
     else:   #无记录则添加
         new_inv=Inventory(code=code,name=name,allocation=allocation_from,inventory_acount=-acount,remark=remark)
         db.session.add(new_inv)
-        # db.session.commit()
+        db.session.commit()
     # 入库操作
     inv2=db.session.query(Inventory).filter(and_(Inventory.code==code,Inventory.allocation==allocation_to)).all()
     if len(inv2)>0:  #有记录则做归并操作
-        inv[0].inventory_acount+=acount
-        # db.session.commit()
+        inv2[0].inventory_acount+=acount
+        db.session.commit()
     else:   #无记录则添加
         new_inv=Inventory(code=code,name=name,allocation=allocation_to,inventory_acount=acount,remark=remark)
         db.session.add(new_inv)
-    # 提交修改
-    db.session.commit()
+        db.session.commit()
     return jsonify({
         'status': 'ok',
         'code': 0,

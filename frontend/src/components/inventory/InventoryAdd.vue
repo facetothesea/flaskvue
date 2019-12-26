@@ -108,6 +108,7 @@ export default {
                   message: '信息:' + this.addForm.code + '/' + this.addForm.name + '/' + this.addForm.allocation + '/' + this.addForm.acount + '/' + this.addForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

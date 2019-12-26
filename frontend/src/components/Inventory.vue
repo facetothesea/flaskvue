@@ -32,13 +32,13 @@
       <el-col :span="5" class="rightpan">
         <el-tabs v-model="activeName" type="border-card">
           <el-tab-pane label="入库" name="first" align="left">
-            <additem></additem>
+            <additem v-on:update_inventorys='updateData'></additem>
           </el-tab-pane>
           <el-tab-pane label="出库" name="second" align="left">
-            <subitem></subitem>
+            <subitem v-on:update_inventorys='updateData'></subitem>
           </el-tab-pane>
           <el-tab-pane label="调整" name="third" align="left">
-            <chgitem></chgitem>
+            <chgitem v-on:update_inventorys='updateData'></chgitem>
           </el-tab-pane>
         </el-tabs>
       </el-col>
