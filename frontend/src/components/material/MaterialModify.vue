@@ -117,6 +117,7 @@ export default {
                   message: '信息:' + this.matModForm.code + '/' + this.matModForm.name + '/' + this.matModForm.state + '/' + this.matModForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

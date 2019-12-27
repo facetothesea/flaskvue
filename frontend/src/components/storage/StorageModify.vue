@@ -84,6 +84,7 @@ export default {
                   message: '信息:' + this.allocationModifyForm.allocation + '/' + this.allocationModifyForm.state + '/' + this.allocationModifyForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

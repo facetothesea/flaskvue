@@ -37,10 +37,10 @@
         v-model="activeName"
         type="border-card">
           <el-tab-pane label="新增" name="first"  align="left" >
-            <addstorage></addstorage>
+            <addstorage v-on:update_inventorys='updateData'></addstorage>
           </el-tab-pane>
           <el-tab-pane label="修改" name="second" align="left">
-            <modifystorage></modifystorage>
+            <modifystorage v-on:update_inventorys='updateData'></modifystorage>
           </el-tab-pane>
         </el-tabs>
       </el-col>

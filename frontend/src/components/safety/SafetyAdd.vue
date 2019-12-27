@@ -78,6 +78,7 @@ export default {
                   message: '信息:' + this.safeAddForm.code + '/' + this.safeAddForm.name + '/' + this.safeAddForm.acount + '/' + this.safeAddForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

@@ -97,6 +97,7 @@ export default {
                   message: '信息:' + this.matAddForm.code + '/' + this.matAddForm.name + '/' + this.matAddForm.state + '/' + this.matAddForm.remark,
                   type: 'success'
                 })
+                this.$emit('update_inventorys') // 更新你组件内容
               }
             })
             .catch(error => {

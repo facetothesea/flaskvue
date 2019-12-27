@@ -48,10 +48,10 @@
         v-model="activeName"
         type="border-card">
           <el-tab-pane label="新增" name="first"  align="left" >
-            <addmaterial></addmaterial>
+            <addmaterial v-on:update_inventorys='updateData'></addmaterial>
           </el-tab-pane>
           <el-tab-pane label="修改" name="second" align="left">
-            <modifymaterial></modifymaterial>
+            <modifymaterial v-on:update_inventorys='updateData'></modifymaterial>
           </el-tab-pane>
         </el-tabs>
       </el-col>
