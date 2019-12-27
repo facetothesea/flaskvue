@@ -9,7 +9,7 @@
           <el-col :span="2" v-for="(r,j) in o" :key="j">
             <el-tooltip placement="top" effect="dark"> <!-- open-delay=300 hide-after=2000 -->
               <div slot="content">{{ acountData[i][j] }}</div>
-              <el-button @click="showDrawer(r,i,j)" type="primary" class="btnshow" :key="i+j" :style="{'background-color': colorList[Math.floor(acountData[i][j]/(acountMax/9))]}">{{(i+j).slice(0,4)}} </el-button>
+              <el-button @click="showDrawer(r,i,j)" type="primary" class="btnshow shake  shake-little" :key="i+j" :style="{'background-color': colorList[Math.floor(acountData[i][j]/(acountMax/9))]}">{{(i+j).slice(0,4)}} </el-button>
             </el-tooltip>
           </el-col>
         </el-row>
